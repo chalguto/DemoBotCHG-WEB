@@ -1,0 +1,37 @@
+<div class="wc-ContentBot" id="BotChat">
+</div>
+<script>
+    const params = BotChat.queryParams(location.search);
+    const user = {
+        id: params['userid'] || 'userid',
+        name: params['username'] || 'username'
+    };
+    const bot = {
+        id: params['botid'] || 'botid',
+        name: params['botname'] || 'botname'
+    };
+    window.botchatDebug = false;
+
+    const speechOptions = {
+        speechRecognizer: new CognitiveServices.SpeechRecognizer({
+            subscriptionKey: '9b48f41f9a7e4e2c9588f7b1dfaee2b2'
+        }),
+        speechSynthesizer: new CognitiveServices.SpeechSynthesizer({
+            gender: CognitiveServices.SynthesisGender.Female,
+            subscriptionKey: '9b48f41f9a7e4e2c9588f7b1dfaee2b2',
+            voiceName: 'Microsoft Server Speech Text to Speech Voice (en-ES, JessaRUS)'
+        })
+    };
+
+    BotChat.App({
+        bot: bot,
+        resize: 'detect',
+        speechOptions: speechOptions,
+        user: user,
+        locale: 'es-es',
+        directLine: {
+            secret: 'UE-84ZgQv6s.cwA.jYo.3UGQRgZyvJyU4u3UXG1zYY6OhKfoX2qh8MX6izB77LU',
+            webSocket: false
+        }
+    }, document.getElementById('BotChat'));
+</script>
